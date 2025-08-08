@@ -120,7 +120,7 @@ export default function Header() {
               </a>
             </div>
           </div>
-          <div className="mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow">
+          <div className="mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow flex items-center justify-center">
             <Image
                 src={'/kindle-image.png'}
                 width={516}

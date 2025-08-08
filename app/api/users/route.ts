@@ -9,17 +9,19 @@ export async function GET(req: Request){
     const clerkUser = await currentUser();
     console.log('Clerk user:', clerkUser ? 'Found' : 'Not found');
 
+    if(!clerkUser) return NextResponse.json({'message': 'User Not found'})
 
     let user;
 
-    if(clerkUser){
-        user = await db.select().from(users).where(eq(users.clerkId, clerkUser.id))
-    }
+    user = await db.select().from(users).where(eq(users.clerkId, clerkUser.id))
+    
     
 
-    if(user){
-        console.log(user)
-        return NextResponse.json({user})
+    if(user.length > 0){
+        console.log(user[0])
+        const existingUser = user[0]
+
+        return NextResponse.json({existingUser})
     }
     else{
         console.log({'message': 'User Doesnt Exist'})
@@ -40,8 +42,9 @@ export async function POST (req: Request){
     }
 
     user = await db.select().from(users).where(eq(users.clerkId, clerkUser.id))
+    user = user[0]
 
-    if(user.length > 0){
+    if(user){
         console.log(user)
         return NextResponse.json({user})
     }
