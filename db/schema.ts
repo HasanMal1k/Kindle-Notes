@@ -4,7 +4,7 @@ import { relations } from "drizzle-orm";
 
 export const users = pgTable('users', {
     id: serial('id').primaryKey(),
-    clerkId: integer('clerk_id').notNull(),
+    clerkId: text('clerk_id').notNull(),
     name: text('name').notNull(),
 })
 

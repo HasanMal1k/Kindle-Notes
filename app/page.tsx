@@ -1,12 +1,12 @@
 import Header from "@/components/Header";
-import Testimonials from "@/components/Testimonials";
+import BookQuotes from "@/components/Quotes";
 import DragNDrop from "@/components/DragNDrop";
 
 export default function Home() {
   return (
     <>
       <Header/>
-      <Testimonials/>
+      <BookQuotes/>
       <DragNDrop/>
     </>
   );
