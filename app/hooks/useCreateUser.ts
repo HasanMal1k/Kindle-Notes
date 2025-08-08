@@ -12,7 +12,7 @@ function useCreateUser() {
        await createUser()
     }
 
-    runCreateUser
+    runCreateUser()
 
     }, [isSignedIn])
     

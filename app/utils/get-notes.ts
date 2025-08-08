@@ -1,7 +1,6 @@
 import useNotesStore from "../stores/notes-store"
 
-const getNotes = async () => {
-    const notes = useNotesStore(state => state.notes)
+const getNotes = async (notes: any) => {
     const response = await fetch('/api/notes', {
         method: 'POST',
         headers: {
