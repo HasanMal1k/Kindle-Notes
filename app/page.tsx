@@ -1,13 +1,9 @@
-import Header from "@/components/Header";
-import BookQuotes from "@/components/Quotes";
-import DragNDrop from "@/components/DragNDrop";
+'use server'
 
-export default function Home() {
+import Home from "@/components/HomePage";
+
+export default async function page() {
   return (
-    <>
-      <Header/>
-      <BookQuotes/>
-      <DragNDrop/>
-    </>
+    <Home/>
   );
 }

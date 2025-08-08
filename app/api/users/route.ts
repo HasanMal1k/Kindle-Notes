@@ -7,6 +7,8 @@ import { eq } from "drizzle-orm"
 export async function GET(req: Request){
 
     const clerkUser = await currentUser();
+    console.log('Clerk user:', clerkUser ? 'Found' : 'Not found');
+
 
     let user;
 
