@@ -4,13 +4,14 @@ import { useCallback, useEffect, useState } from "react"
 import { useDropzone, type FileRejection } from "react-dropzone"
 import { FilePlus2 } from "lucide-react"
 import extractAllBookNotes from "@/app/utils/extract-notes"
+import useNotesStore from "@/app/stores/notes-store"
 
 export default function DragNDrop() {
   const [isDragOver, setIsDragOver] = useState(false)
-  
+  const { updateNotes } = useNotesStore()
+
   const onDrop = useCallback((acceptedFiles: File[]) => {
     console.log("Accepted files:", acceptedFiles)
-    
     acceptedFiles.forEach((file) => {
       const reader = new FileReader()
       
@@ -18,6 +19,8 @@ export default function DragNDrop() {
         const result = reader.result
         if (typeof result === "string") {
           const notes = extractAllBookNotes(result)
+          updateNotes(notes)
+
           console.log("Parsed notes:", notes)
         } else {
           console.error("Unexpected file content format", result)
