@@ -4,3 +4,5 @@ const checkUserExists = async () => {
     })
     return await response.json()
 }
+
+export default checkUserExists

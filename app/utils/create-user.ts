@@ -4,3 +4,5 @@ const createUser = async () => {
     })
     return await response.json()
 }
+
+export default createUser

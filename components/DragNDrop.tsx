@@ -8,7 +8,7 @@ import useNotesStore from "@/app/stores/notes-store"
 
 export default function DragNDrop() {
   const [isDragOver, setIsDragOver] = useState(false)
-  const { updateNotes } = useNotesStore()
+  const updateNotes = useNotesStore(state => state.updateNotes)
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     console.log("Accepted files:", acceptedFiles)
