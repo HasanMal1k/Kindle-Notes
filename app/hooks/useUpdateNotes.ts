@@ -7,12 +7,13 @@ function useUpdateNotes() {
 
     const { isSignedIn, user, isLoaded } = useUser()
     const notes = useNotesStore(state => state.notes)
-    
+    const updateNotes = useNotesStore(state => state.updateNotes)
 
     useEffect(()=> {
 
     async function runGetNotes(){
-       await getNotes(notes)
+        const newNotes = await getNotes(notes)
+        updateNotes(newNotes)
     }
 
     runGetNotes()

@@ -3,7 +3,7 @@ import { BookNotes } from '../utils/extract-notes'
 
 type Store = {
   notes: Record<string, BookNotes> | null
-  updateNotes: (newNotes: Record<string, BookNotes>) => void
+  updateNotes: (newNotes: Record<string, BookNotes> | null) => void
 }
 
 const useNotesStore = create<Store>((set) => ({
