@@ -5,16 +5,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
 
-type NavItem = {
-    name: string, href: string
-}
 
-const navigation: NavItem[] = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
-]
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -94,7 +85,7 @@ export default function Header() {
               <div className="relative flex items-center gap-x-4 rounded-full bg-white px-4 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                 <span className="font-semibold text-teal-600">Simply Follow</span>
                 <span aria-hidden="true" className="h-4 w-px bg-gray-900/10" />
-                <a href="#" className="flex items-center gap-x-1">
+                <a href="#instructions" className="flex items-center gap-x-1">
                   <span aria-hidden="true" className="absolute inset-0" />
                   The Steps Below
                   <ChevronDownIcon aria-hidden="true" className="-mr-2 size-5 text-gray-400" />

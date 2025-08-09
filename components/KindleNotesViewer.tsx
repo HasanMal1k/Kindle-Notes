@@ -90,11 +90,12 @@ export default function KindleNotesViewer() {
   }, [isDragging]);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white border-b-2 border-b-gray-400 pb-10">
       {/* Header */}
-      <div className="border-b border-gray-200 px-6 py-4">
-        <h1 className="text-2xl font-bold text-gray-900">Your Kindle Notes</h1>
-        <p className="text-gray-600 mt-1">Browse and search through your highlights and notes</p>
+      <div className="border-b border-gray-200 px-6 py-4 w-full flex items-center justify-center flex-col">
+        <h2 className="text-base/7 font-semibold text-teal-600">Notes Processed</h2>
+        <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Your Kindle Notes</h1>
+        <p className="mt-6 text-lg leading-8 text-gray-600">Browse and search through your highlights and notes</p>
       </div>
 
       {/* Main Content */}

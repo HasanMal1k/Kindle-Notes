@@ -46,6 +46,7 @@ export default function BookQuotes() {
           <p className="mt-2 text-4xl font-bold tracking-tight text-gray-700 sm:text-5xl">
             Words that <span className="text-teal-500">inspire</span>
           </p>
+          <p className="mt-6 text-lg leading-8 text-gray-600">Some random quotes to fill space.</p>
         </div>
 
         {/* Center Quote - Featured */}

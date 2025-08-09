@@ -8,6 +8,7 @@ import useUpdateNotes from "@/app/hooks/useUpdateNotes";
 import useNotesStore from "@/app/stores/notes-store";
 import KindleNotesViewer from "./KindleNotesViewer";
 import Instructions from "./Instructions";
+import Footer from './Footer'
 
 function HomePage() {
   useCreateUser()
@@ -20,6 +21,7 @@ function HomePage() {
       <DragNDrop/>
       <Instructions/>
       {notes && <KindleNotesViewer/>}
+      <Footer/>
     </>
   )
 }

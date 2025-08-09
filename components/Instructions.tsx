@@ -1,9 +1,9 @@
 import React from 'react'
-import { CircleCheck, Play, Smartphone, FolderOpen, Upload, CheckCircle } from 'lucide-react'
+import { CircleCheck, Play, Smartphone, FolderOpen, Upload, CheckCircle, UserRound } from 'lucide-react'
 
 function Instructions() {
   return (
-    <div className="bg-white py-24 sm:py-32">
+    <div className="bg-white py-24 sm:py-32" id='instructions'>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center mb-16">
           <h2 className="text-base/7 font-semibold text-teal-600">How It Works</h2>
@@ -95,9 +95,16 @@ function Instructions() {
               </div>
 
               <div className="mt-10 pt-8 border-t border-gray-200">
-                <div className="flex items-center gap-3 text-teal-600">
-                  <CircleCheck className="w-5 h-5" />
-                  <span className="font-medium">Ready to get started? Upload your file now!</span>
+                <div className="flex items-start px-4 flex-col gap-4 text-teal-600/80">
+                  <div className='flex items-center justify-center gap-2'>
+                    <CircleCheck className="w-5 h-5" />
+                    <span className="font-medium">Ready to get started? Upload your file now!</span>
+                  </div>
+                  <div className='flex items-center justify-center gap-2'>
+                    <UserRound className="w-5 h-5" />
+                    <span className="font-medium">Sign up free to access your notes anywhere.</span>
+                  </div>
+
                 </div>
               </div>
             </div>
