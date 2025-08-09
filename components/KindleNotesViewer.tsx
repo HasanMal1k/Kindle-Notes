@@ -90,7 +90,7 @@ export default function KindleNotesViewer() {
   }, [isDragging]);
 
   return (
-    <div className="bg-white border-b-2 border-b-gray-400 pb-10">
+    <div className="bg-white border-b-2 border-b-gray-400 pb-10" id='notes'>
       {/* Header */}
       <div className="border-b border-gray-200 px-6 py-4 w-full flex items-center justify-center flex-col">
         <h2 className="text-base/7 font-semibold text-teal-600">Notes Processed</h2>

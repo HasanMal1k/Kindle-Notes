@@ -9,11 +9,21 @@ import useNotesStore from "@/app/stores/notes-store";
 import KindleNotesViewer from "./KindleNotesViewer";
 import Instructions from "./Instructions";
 import Footer from './Footer'
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 function HomePage() {
   useCreateUser()
   useUpdateNotes()
   const notes = useNotesStore(state => state.notes)
+  const router = useRouter()
+
+  useEffect(()=> {
+    if(notes){
+      router.push('/#notes')
+    }
+  }, [notes])
+
   return (
     <>
       <Header/>
