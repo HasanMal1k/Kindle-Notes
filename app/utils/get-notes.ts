@@ -1,22 +1,26 @@
-import useNotesStore from "../stores/notes-store"
-
 const getNotes = async (notes: any) => {
-    const response = await fetch('/api/notes', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            notes: notes
+    try {
+        const response = await fetch('/api/notes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                notes: notes
+            })
         })
-    })
 
-    if(!response.ok){
-        throw new Error('Failed to fetch notes')
+        const data = await response.json()
+
+        if (!response.ok) {
+            throw new Error(data.error || `HTTP error! status: ${response.status}`)
+        }
+
+        return data
+    } catch (error) {
+        console.error('Failed to fetch notes:', error)
+        throw error
     }
-
-    const data = await response.json()
-    return data
 }
 
 export default getNotes

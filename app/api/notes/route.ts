@@ -2,45 +2,73 @@ import { NextResponse, NextRequest } from "next/server";
 import { users, bookNotes } from "@/db/schema";
 import { db } from "@/db";
 import { eq } from 'drizzle-orm'
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: Request) {
-   const clerkUser = await currentUser()
-   const body = await req.json()
-   const { notes: newNotes} = body
-   
-   if(!clerkUser) return NextResponse.json({'message': 'User Not found'})
-   
-   const user = await db.select().from(users).where(eq(users.clerkId, clerkUser.id))
+   try {
+       // Use auth() instead of currentUser() for better error handling
+       const { userId } = await auth()
        
-   if(user.length > 0){
-       const userId = user[0].id
+       if (!userId) {
+           return NextResponse.json(
+               { error: 'Unauthorized - Please sign in' }, 
+               { status: 401 }
+           )
+       }
+
+       const body = await req.json()
+       const { notes: newNotes } = body
        
-       const notes = await db.select().from(bookNotes).where(eq(bookNotes.userId, userId))
+       // Find user in database
+       const user = await db.select().from(users).where(eq(users.clerkId, userId))
+           
+       if (user.length === 0) {
+           return NextResponse.json(
+               { error: 'User not found in database' }, 
+               { status: 404 }
+           )
+       }
        
-       if(notes.length > 0){
-           if(newNotes){
+       const dbUserId = user[0].id
+       
+       // Check if user has existing notes
+       const existingNotes = await db.select().from(bookNotes).where(eq(bookNotes.userId, dbUserId))
+       
+       if (existingNotes.length > 0) {
+           // User has existing notes
+           if (newNotes) {
+               // Update existing notes
                await db.update(bookNotes)
-                   .set({data: newNotes})
-                   .where(eq(bookNotes.userId, userId))
-                   .returning()
+                   .set({ data: newNotes })
+                   .where(eq(bookNotes.userId, dbUserId))
                
-               return NextResponse.json({[`${clerkUser.firstName}'s notes`]: newNotes });
+               return NextResponse.json({ success: true, notes: newNotes });
            }
            
-           const notesData = notes[0].data
-           return NextResponse.json({[`${clerkUser.firstName}'s notes`]: notesData });
+           // Return existing notes
+           const notesData = existingNotes[0].data
+           return NextResponse.json({ success: true, notes: notesData });
+       } else {
+           // User has no existing notes
+           if (newNotes) {
+               // Create new notes record
+               await db.insert(bookNotes).values({
+                   userId: dbUserId,
+                   data: newNotes
+               })
+               
+               return NextResponse.json({ success: true, notes: newNotes });
+           }
+           
+           // No notes exist and none provided
+           return NextResponse.json({ success: true, notes: null });
        }
        
-       if(newNotes){
-           await db.insert(bookNotes).values({
-               userId: userId,
-               data: newNotes
-           }).returning()
-           
-           return NextResponse.json({[`${clerkUser.firstName}'s notes`]: newNotes });
-       }
+   } catch (error) {
+       console.error('Notes API Error:', error)
+       return NextResponse.json(
+           { error: 'Internal server error' }, 
+           { status: 500 }
+       )
    }
-   
-   return NextResponse.json({'message': 'notes not found'})
 }
