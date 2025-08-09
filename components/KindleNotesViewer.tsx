@@ -17,9 +17,6 @@ export type BookNotes = {
   notes: Note[];
 };
 
-// Mock data for fallback (can be removed once you have real data)
-const mockNotes: Record<string, BookNotes> = {};
-
 export default function KindleNotesViewer() {
   // Get notes from Zustand store
   const notes = useNotesStore(state => state.notes);
@@ -46,16 +43,21 @@ export default function KindleNotesViewer() {
   
   const selectedBookData: BookNotes | undefined = allNotes[selectedBook];
 
-  // Filter books based on search term
-  const filteredBooks: [string, BookNotes][] = Object.entries(allNotes).filter(([key, book]) =>
-    (book.title && book.title.toLowerCase().includes(bookSearchTerm.toLowerCase())) ||
-    (book.author && book.author.toLowerCase().includes(bookSearchTerm.toLowerCase()))
-  );
+  // Filter books based on search term - Fixed to handle undefined values
+  const filteredBooks: [string, BookNotes][] = Object.entries(allNotes).filter(([key, book]) => {
+    const title = book.title || '';
+    const author = book.author || '';
+    const searchLower = bookSearchTerm.toLowerCase();
+    
+    return title.toLowerCase().includes(searchLower) || 
+           author.toLowerCase().includes(searchLower);
+  });
 
-  // Filter notes based on search term
-  const filteredNotes: Note[] = selectedBookData?.notes.filter(note =>
-    note.content && note.content.toLowerCase().includes(searchTerm.toLowerCase())
-  ) || [];
+  // Filter notes based on search term - Fixed to handle undefined values
+  const filteredNotes: Note[] = selectedBookData?.notes.filter(note => {
+    const content = note.content || '';
+    return content.toLowerCase().includes(searchTerm.toLowerCase());
+  }) || [];
 
   // Handle resizing
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -146,7 +148,7 @@ export default function KindleNotesViewer() {
                         <Quote className="text-teal-500 h-5 w-5 mt-1 flex-shrink-0" />
                         <div className="flex-1 min-w-0">
                           <blockquote className="text-gray-800 leading-relaxed mb-3">
-                            "{note.content}"
+                            "{note.content || 'No content available'}"
                           </blockquote>
                           
                           <div className="flex items-center gap-4 text-xs text-gray-500">
@@ -232,10 +234,10 @@ export default function KindleNotesViewer() {
                           <Book className={`h-5 w-5 mt-1 flex-shrink-0 ${isSelected ? 'text-teal-600' : 'text-gray-400'}`} />
                           <div className="flex-1 min-w-0">
                             <h3 className={`font-semibold text-sm mb-1 ${isSelected ? 'text-teal-900' : 'text-gray-900'}`}>
-                              {book.title}
+                              {book.title || 'Untitled Book'}
                             </h3>
                             <p className="text-gray-600 text-xs mb-2">
-                              by {book.author}
+                              by {book.author || 'Unknown Author'}
                             </p>
                             <div className="flex items-center justify-between">
                               <span className={`text-xs px-2 py-1 rounded-full ${
@@ -243,7 +245,7 @@ export default function KindleNotesViewer() {
                                   ? 'bg-teal-100 text-teal-700' 
                                   : 'bg-gray-100 text-gray-600'
                               }`}>
-                                {book.notes.length} note{book.notes.length !== 1 ? 's' : ''}
+                                {book.notes?.length || 0} note{(book.notes?.length || 0) !== 1 ? 's' : ''}
                               </span>
                               {isSelected && (
                                 <div className="text-teal-600 text-xs font-medium">
