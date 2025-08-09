@@ -56,7 +56,7 @@ export default function BookQuotes() {
             <blockquote className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-700 leading-tight relative z-10">
               <Quote className="inline -rotate-180 -translate-y-6 -translate-x-2 text-teal-500 text-center"/>
                 {centerQuote.quote}
-              <Quote className="inline text-teal-500 -translate-y-6"/>
+              <Quote className="inline text-teal-500 -translate-y-4"/>
             </blockquote>
            
           </div>
