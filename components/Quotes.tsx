@@ -42,7 +42,7 @@ export default function BookQuotes() {
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center mb-16">
-          <h2 className="text-base/7 font-semibold text-gray-600">Literary Wisdom</h2>
+          <h2 className="text-base/7 font-semibold text-teal-600">Literary Wisdom</h2>
           <p className="mt-2 text-4xl font-bold tracking-tight text-gray-700 sm:text-5xl">
             Words that <span className="text-teal-500">inspire</span>
           </p>

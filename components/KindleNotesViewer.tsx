@@ -142,7 +142,7 @@ export default function KindleNotesViewer() {
                   {filteredNotes.map((note, index) => (
                     <div key={index} className="group border border-gray-200 rounded-lg p-4 hover:border-teal-300 hover:shadow-sm transition-all duration-200">
                       <div className="flex items-start gap-3">
-                        <Quote className="text-teal-500 h-5 w-5 mt-1 flex-shrink-0" />
+                        <Quote className="text-teal-500 h-5 w-5 mt-1 flex-shrink-0 rotate-180" />
                         <div className="flex-1 min-w-0">
                           <blockquote className="text-gray-800 leading-relaxed mb-3">
                             "{note.content || 'No content available'}"

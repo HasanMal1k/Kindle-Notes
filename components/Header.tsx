@@ -63,7 +63,7 @@ export default function Header() {
 
       </header>
 
-      <div className="relative isolate pt-14">
+      <div className="relative isolate">
         <svg
           aria-hidden="true"
           className="absolute inset-0 -z-10 size-full mask-[radial-gradient(100%_100%_at_top_right,white,transparent)] stroke-gray-200"
