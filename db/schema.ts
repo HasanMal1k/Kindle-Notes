@@ -8,7 +8,6 @@ export const users = pgTable('users', {
     name: text('name').notNull(),
 })
 
-// Fixed: Store the full notes data structure as returned by extractAllBookNotes
 export const bookNotes = pgTable('book_notes', {
     id: serial('id').primaryKey(),
     userId: integer('user_id').references(() => users.id).notNull(),

@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Book, Calendar, Clock, MapPin, Quote, Search } from 'lucide-react';
-// Import your Zustand store
 import useNotesStore from '@/app/stores/notes-store';
 
-// TypeScript types matching your existing structure
 export type Note = {
   content: string;
   date: string | null;
@@ -18,13 +16,12 @@ export type BookNotes = {
 };
 
 export default function KindleNotesViewer() {
-  // Get notes from Zustand store
   const notes = useNotesStore(state => state.notes);
   
   const [selectedBook, setSelectedBook] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [bookSearchTerm, setBookSearchTerm] = useState<string>('');
-  const [leftWidth, setLeftWidth] = useState<number>(60); // Percentage
+  const [leftWidth, setLeftWidth] = useState<number>(60); 
   const [isDragging, setIsDragging] = useState<boolean>(false);
   
   const containerRef = useRef<HTMLDivElement>(null);
