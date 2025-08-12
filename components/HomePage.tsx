@@ -15,6 +15,8 @@ import { useRouter } from "next/navigation";
 function HomePage() {
   useCreateUser()
   useUpdateNotes()
+
+  // Added because it kept routing to notes section.
   const [routeState, setRouteState ] = useState(false)
   const notes = useNotesStore(state => state.notes)
   const router = useRouter()
