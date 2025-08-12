@@ -101,12 +101,12 @@ export default function Header() {
             </p>
             <div className="mt-10 flex items-center gap-x-6">
               <a
-                href="#"
+                href="/sign-in"
                 className="transition-all duration-200 rounded-md bg-teal-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-teal-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
               >
                 Get started
               </a>
-              <a href="#" className="text-sm/6 font-semibold text-gray-900">
+              <a href="#instructions" className="text-sm/6 font-semibold text-gray-900">
                 Learn more <span aria-hidden="true">→</span>
               </a>
             </div>

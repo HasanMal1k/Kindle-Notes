@@ -9,18 +9,20 @@ import useNotesStore from "@/app/stores/notes-store";
 import KindleNotesViewer from "./KindleNotesViewer";
 import Instructions from "./Instructions";
 import Footer from './Footer'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 function HomePage() {
   useCreateUser()
   useUpdateNotes()
+  const [routeState, setRouteState ] = useState(false)
   const notes = useNotesStore(state => state.notes)
   const router = useRouter()
 
   useEffect(()=> {
-    if(notes){
+    if(notes && !routeState){
       router.push('/#notes')
+      setRouteState(true)
     }
   }, [notes])
 
